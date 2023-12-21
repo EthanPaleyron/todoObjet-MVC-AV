@@ -93,9 +93,8 @@ ob_start();
                     <div class="afficheInput hiddenEdit">
                         <form class="formEdit" action="/dashboard/<?php echo escape($task->getName()); ?>" method="post">
                             <div class="labelInput">
-                                <label for="nameTodo"><i class="fas fa-pen"></i></label>
-                                <input type="text" name="nameTodo"
-                                    value="<?php echo old("nameTodo") ? old("nameTodo") : escape($task->getName()); ?>"
+                                <label for="nameTask"><i class="fas fa-pen"></i></label>
+                                <input type="text" name="nameTask" value="<?= escape($task->getName()); ?>"
                                     placeholder="edit todo">
                             </div>
                             <button type="submit" name="button"><i class="fas fa-check"></i></button>
