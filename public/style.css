@@ -625,6 +625,23 @@ section.homepage p {
   cursor: pointer;
 }
 
+.viewList #btnDeleteTask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: red;
+  border-radius: 100%;
+  padding: 5px 10px;
+  transition: all 0.5s ease;
+}
+
+.viewList #btnDeleteTask:hover {
+  background-color: #052659ff;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
 .viewList > .separateur {
   border-top: 4px solid white;
   width: 100%;

@@ -56,41 +56,53 @@ ob_start();
                 <?php
                 foreach ($todo->tasks() as $task) {
                     ?>
-                        <div class="task">
-                            <?php if ($task->getCheckTask() == "no") {
-                                ?>
-                                    <h2>
-                                        <?= escape($task->getName()); ?>
-                                    </h2>
-                                    <form
-                                        action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/check"
-                                        method="post">
-                                        <input type="hidden" name="nameList" value="<?= $todo->getName(); ?>">
-                                        <input type="hidden" name="task_id" value="<?= escape($task->getId()); ?>">
-                                        <input type="hidden" name="check" value="<?= escape($task->getCheckTask()); ?>">
-                                        <button class="btnCheckTrue">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                    </form>
-                            <?php } else {
-                                ?>
-                                    <h2 class="check">
-                                        <?= escape($task->getName()); ?>
-                                    </h2>
-                                    <form
-                                        action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/check"
-                                        method="post">
-                                        <input type="hidden" name="nameList" value="<?= $todo->getName(); ?>">
-                                        <input type="hidden" name="task_id" value="<?= escape($task->getId()); ?>">
-                                        <input type="hidden" name="check" value="<?= escape($task->getCheckTask()); ?>">
-                                        <button class="btnCheckFalse">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </form>
-                            <?php }
+                    <div class="task">
+                        <?php if ($task->getCheckTask() == "no") {
                             ?>
-                        </div>
-                        <?php
+                            <h2>
+                                <?= escape($task->getName()); ?>
+                            </h2>
+                            <form
+                                action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/check"
+                                method="post">
+                                <input type="hidden" name="nameList" value="<?= $todo->getName(); ?>">
+                                <input type="hidden" name="task_id" value="<?= escape($task->getId()); ?>">
+                                <input type="hidden" name="check" value="<?= escape($task->getCheckTask()); ?>">
+                                <button class="btnCheckTrue">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
+                        <?php } else {
+                            ?>
+                            <h2 class="check">
+                                <?= escape($task->getName()); ?>
+                            </h2>
+                            <form
+                                action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/check"
+                                method="post">
+                                <input type="hidden" name="nameList" value="<?= $todo->getName(); ?>">
+                                <input type="hidden" name="task_id" value="<?= escape($task->getId()); ?>">
+                                <input type="hidden" name="check" value="<?= escape($task->getCheckTask()); ?>">
+                                <button class="btnCheckFalse">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+                        <?php }
+                        ?>
+                    </div>
+                    <div class="afficheInput hiddenEdit">
+                        <form class="formEdit" action="/dashboard/<?php echo escape($task->getName()); ?>" method="post">
+                            <div class="labelInput">
+                                <label for="nameTodo"><i class="fas fa-pen"></i></label>
+                                <input type="text" name="nameTodo"
+                                    value="<?php echo old("nameTodo") ? old("nameTodo") : escape($task->getName()); ?>"
+                                    placeholder="edit todo">
+                            </div>
+                            <button type="submit" name="button"><i class="fas fa-check"></i></button>
+                        </form>
+                        <p id="btnDeleteTask"><i class="fas fa-trash"></i></p>
+                    </div>
+                    <?php
                 }
                 ?>
             </div>
@@ -140,10 +152,23 @@ ob_start();
         modalDelete.style.display = 'none';
     });
 
-    // const h2 = document.querySelectorAll(".task > h2");
-    // h2.forEach(element => {
-        
-    // });
+    const titres = document.querySelectorAll(".task > h2");
+    titres.forEach(titre => {
+        const edit = titre.parentElement.nextSibling.nextSibling;
+        const task = titre.parentElement;
+        titre.addEventListener("click", () => {
+            const tasks = document.getElementsByClassName("task");
+            const edits = document.getElementsByClassName("afficheInput");
+            Array.from(edits).forEach(e => {
+                e.classList.add("hiddenEdit")
+            });
+            Array.from(tasks).forEach(e => {
+                e.classList.remove("hiddenEdit");
+            });
+            edit.classList.remove("hiddenEdit");
+            task.classList.add("hiddenEdit");
+        })
+    });
 
 </script>
 
