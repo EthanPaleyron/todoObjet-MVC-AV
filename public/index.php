@@ -20,7 +20,7 @@ $router->post('/register/', "UserController@register");
 $router->post('/dashboard/nouveau/', "TodoController@store");
 $router->post('/dashboard/task/nouveau', "TaskController@store");
 $router->post('/dashboard/:todo/task/:task/delete/', "TaskController@delete");
-$router->post('/dashboard/:todo/task/:task', "TaskController@update");
+$router->post('/dashboard/:todo/task/:task/update', "TaskController@update");
 $router->post('/dashboard/:todo/task/:task/check', "TaskController@check");
 $router->post('/dashboard/:todo/', "TodoController@update");
 $router->post('/dashboard/:todo/delete/', "TodoController@delete");

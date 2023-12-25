@@ -91,15 +91,28 @@ ob_start();
                         ?>
                     </div>
                     <div class="afficheInput hiddenEdit">
-                        <form class="formEdit" action="/dashboard/<?php echo escape($task->getName()); ?>" method="post">
+                        <form class="formEdit"
+                            action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/update"
+                            method="post">
                             <div class="labelInput">
                                 <label for="nameTask"><i class="fas fa-pen"></i></label>
-                                <input type="text" name="nameTask" value="<?= escape($task->getName()); ?>"
-                                    placeholder="edit todo">
+                                <input type="hidden" name="nameTodo" value="<?= escape($todo->getName()); ?>">
+                                <input type="hidden" name="idTodo" value="<?= escape($todo->getId()); ?>">
+                                <input type="hidden" name="idTask" value="<?= escape($task->getId()); ?>">
+                                <input type="text" name="nameTask"
+                                    value="<?= old("nameTask") ? old("nameTask") : escape($task->getName()); ?>"
+                                    placeholder="edit task">
                             </div>
-                            <button type="submit" name="button"><i class="fas fa-check"></i></button>
+                            <button type="submit" name="update"><i class="fas fa-check"></i></button>
                         </form>
-                        <p id="btnDeleteTask"><i class="fas fa-trash"></i></p>
+                        <form
+                            action="/dashboard/<?= escape($todo->getName()); ?>/task/<?= escape($task->getName()); ?>/delete"
+                            id="btnDeleteTask" method="post">
+                            <input type="hidden" name="nameList" value="<?= $todo->getName(); ?>">
+                            <input type="hidden" name="idTask" value="<?= escape($task->getId()); ?>">
+                            <input type="hidden" name="idTodo" value="<?= escape($todo->getId()); ?>">
+                            <button><i class="fas fa-trash"></i></button>
+                        </form>
                     </div>
                     <?php
                 }

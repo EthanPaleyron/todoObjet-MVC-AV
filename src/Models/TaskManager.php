@@ -41,25 +41,24 @@ class TaskManager
         ));
     }
 
-    // public function update($slug)
-    // {
-    //     $stmt = $this->bdd->prepare("UPDATE task SET name = ? WHERE name = ? AND list_id = ?");
-    //     $stmt->execute(array(
-    //         $_POST['nameTodo'],
-    //         $slug,
-    //         $_SESSION["user"]["id"]
-    //     ));
-    // }
+    public function delete()
+    {
+        $stmt = $this->bdd->prepare("DELETE FROM task WHERE id = ? AND list_id = ?");
+        $stmt->execute(array(
+            $_POST["idTask"],
+            $_POST["idTodo"]
+        ));
+    }
 
-    // public function delete($slug)
-    // {
-
-    //     $stmt = $this->bdd->prepare("DELETE FROM task WHERE id = ? AND list_id = ?");
-    //     $stmt->execute(array(
-    //         $_POST["idList"],
-    //         $_SESSION["user"]["id"]
-    //     ));
-    // }
+    public function update($slug)
+    {
+        $stmt = $this->bdd->prepare("UPDATE task SET name = ? WHERE id = ? AND list_id = ?");
+        $stmt->execute(array(
+            $slug,
+            $_POST["idTask"],
+            $_POST["idTodo"],
+        ));
+    }
 
     public function getAll($listId)
     {
